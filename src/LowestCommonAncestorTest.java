@@ -45,12 +45,12 @@ public class LowestCommonAncestorTest {
 		root.rightChild.leftChild = new Node(6);
 		root.rightChild.rightChild = new Node(7);
 		//@formatter:off
-		 //        __1__
-		 //      /     	 \
-		 //    _2_       _3_
-		 //  /     \   / 	 \
-		 // 4       5 6       7 
-		 //@formatter:on
+		//        __1__
+		//      /     	\
+		//    _2_       _3_
+		//  /     \   / 	\
+		// 4       5 6       7 
+		//@formatter:on
 
 		Node targetNode = null;
 		assertFalse(LowestCommonAncestor.isNodeValid(root, targetNode),
@@ -82,5 +82,111 @@ public class LowestCommonAncestorTest {
 		assertFalse(LowestCommonAncestor.isNodeValid(root, targetNode),
 				"In a BinaryTree if the targetNode is NOT found in it then it is NOT valid");
 
+	}
+
+	@Test
+	public void testFindLCASimpleGraph() {
+		Node root = new Node(1);
+		root.rightChild = new Node(2);
+		root.rightChild = new Node(3);
+		//@formatter:off
+		// 1
+		//	\
+		//	 2
+		//	  \
+		//     3
+		//@formatter:on
+
+		Node firstNode = new Node(3);
+		Node secondNode = new Node(2);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 2,
+				"In this simple graph the LCA of 2 and 3 is 2");
+
+		firstNode = new Node(1);
+		secondNode = new Node(2);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 1,
+				"In this simple graph the LCA of 1 and 2 is 1");
+
+		firstNode = new Node(3);
+		secondNode = new Node(1);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 1,
+				"In this simple graph the LCA of 1 and 3 is 1");
+
+		firstNode = null;
+		secondNode = new Node(1);
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
+		firstNode = new Node(3);
+		secondNode = null;
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
+		firstNode = new Node(4);
+		secondNode = new Node(1);
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
+		firstNode = new Node(2);
+		secondNode = new Node(5);
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
+	}
+
+	@Test
+	public void testFindLCABinaryTree() {
+		Node root = new Node(1);
+		root.leftChild = new Node(2);
+		root.rightChild = new Node(3);
+		root.leftChild.leftChild = new Node(4);
+		root.leftChild.rightChild = new Node(5);
+		root.rightChild.leftChild = new Node(6);
+		root.rightChild.rightChild = new Node(7);
+		//@formatter:off
+		//        __1__
+		//      /     	\
+		//    _2_       _3_
+		//  /     \   / 	\
+		// 4       5 6       7 
+		//@formatter:on
+
+		Node firstNode = new Node(6);
+		Node secondNode = new Node(7);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 3,
+				"In this simple graph the LCA of 6 and 7 is 3");
+
+		firstNode = new Node(4);
+		secondNode = new Node(3);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 1,
+				"In this simple graph the LCA of 4 and 3 is 1");
+
+		firstNode = new Node(1);
+		secondNode = new Node(5);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 1,
+				"In this simple graph the LCA of 1 and 5 is 1");
+
+		firstNode = new Node(1);
+		secondNode = new Node(2);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 1,
+				"In this simple graph the LCA of 1 and 2 is 1");
+
+		firstNode = new Node(2);
+		secondNode = new Node(3);
+		assertEquals(LowestCommonAncestor.findLCA(root, firstNode, secondNode).value, 1,
+				"In this simple graph the LCA of 2 and 3 is 1");
+
+		firstNode = null;
+		secondNode = new Node(1);
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
+		firstNode = new Node(3);
+		secondNode = null;
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
+		firstNode = new Node(50);
+		secondNode = new Node(1);
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
+		firstNode = new Node(2);
+		secondNode = new Node(9999);
+		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
+				"Make sure null is returned upon an invalid input");
 	}
 }
