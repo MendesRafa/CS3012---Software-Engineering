@@ -88,7 +88,7 @@ public class LowestCommonAncestorTest {
 	public void testFindLCASimpleGraph() {
 		Node root = new Node(1);
 		root.rightChild = new Node(2);
-		root.rightChild = new Node(3);
+		root.rightChild.rightChild = new Node(3);
 		//@formatter:off
 		// 1
 		//	\
