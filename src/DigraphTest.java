@@ -16,6 +16,15 @@ class DigraphTest {
 			Digraph invalidGraph = new Digraph(-2);
 		}, "When a negative number is passed as a paramter to the contructor it should throw a runtime exception");
 	}
+	
+	@Test
+	void testIsVertexValid() {
+		Digraph test = new Digraph(4);
+		
+		assertFalse(test.isVertexValid(-1), "If the supplied vertex < 0 then it is invalid");
+		assertTrue(test.isVertexValid(3), "If the supplied vertex > 0 and < V then it is valid");
+		assertFalse(test.isVertexValid(4), "If the supplied vertex > V then it is invalid");
+	}
 
 	@Test
 	void testAddEdge() {
