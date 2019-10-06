@@ -25,4 +25,11 @@ public class Digraph {
 			this.E++;
 		}
 	}
+	
+	public boolean isVertexValid(int v) {
+		if(v<0 || v>=V) {
+			return false;
+		}
+		else return true;
+	}
 }
