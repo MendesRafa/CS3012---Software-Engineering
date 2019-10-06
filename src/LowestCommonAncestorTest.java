@@ -189,4 +189,26 @@ public class LowestCommonAncestorTest {
 		assertNull(LowestCommonAncestor.findLCA(root, firstNode, secondNode),
 				"Make sure null is returned upon an invalid input");
 	}
+
+	@Test
+	public void testIsAcyclic () {
+		Digraph testGraph = new Digraph(0);
+		assertTrue(isAcyclic(testGraph), "Since this graph is empty there should be no cycles");
+		
+		testGraph = new Digraph(1);
+		testGraph.addEdge(1, 1);
+		assertFalse(isAcyclic(testGraph),"When a vertex has an edge which goes to itsel then the graph has a cycle");
+		
+		testGraph = new Digraph(4);
+		assertTrue(isAcyclic(testGraph), "This graph is only made up of vertices but no edges so it shouldn't have a cycle");
+		
+		testGraph.addEdge(0, 1);
+		testGraph.addEdge(1, 2);
+		testGraph.addEdge(2, 3);
+		
+		assertTrue(isAcyclic(testGraph), "Since this graph has no cycles it is acyclic");
+		
+		testGraph.addEdge(3, 0);
+		assertFalse(isAcyclic(testGraph), "Since this graph has a cycle it is not acyclic");
+	}
 }
