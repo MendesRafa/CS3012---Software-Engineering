@@ -12,7 +12,7 @@ class DigraphTest {
 		test = new Digraph(0);
 		assertEquals(test.V, 0, "When a graph is created with 0 verties as the paramter the number of vertices should be 0");
 		
-		assertThrows(RuntimeException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 			Digraph invalidGraph = new Digraph(-2);
 		}, "When a negative number is passed as a paramter to the contructor it should throw a runtime exception");
 	}
@@ -30,6 +30,7 @@ class DigraphTest {
 		
 		test.addEdge(0,1);
 		assertEquals(test.E, 2, "If an edge is added but in an opposite direction the number of edges should still increase");
+
 		
 	}
 }
