@@ -196,7 +196,7 @@ public class LowestCommonAncestorTest {
 		assertFalse(LowestCommonAncestor.isCyclic(testGraph), "Since this graph is empty there should be no cycles");
 		
 		testGraph = new Digraph(1);
-		testGraph.addEdge(1, 1);
+		testGraph.addEdge(0, 0);
 		assertTrue(LowestCommonAncestor.isCyclic(testGraph),"When a vertex has an edge which goes to itsel then the graph has a cycle");
 		
 		testGraph = new Digraph(4);
