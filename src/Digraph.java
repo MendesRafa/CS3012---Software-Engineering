@@ -21,23 +21,21 @@ public class Digraph {
 
 	public void addEdge(int v, int w) {
 		if (isVertexValid(v) && isVertexValid(w)) {
-			if(!adj.get(v).contains(w)) {
+			if (!adj.get(v).contains(w)) {
 				adj.get(v).add(w);
 				this.E++;
-			}
-			else {
+			} else {
 				throw new IllegalArgumentException("edge " + v + " -> " + w + " is already in the graph");
 			}
-		}
-		else {
-			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+		} else {
+			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
 		}
 	}
-	
+
 	public boolean isVertexValid(int v) {
-		if(v<0 || v>=V) {
+		if (v < 0 || v >= V) {
 			return false;
-		}
-		else return true;
+		} else
+			return true;
 	}
 }
