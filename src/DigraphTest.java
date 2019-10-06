@@ -34,12 +34,23 @@ class DigraphTest {
 		test.addEdge(1,0);
 		assertEquals(test.E, 1, "Whenever an edge is added to an empty graph it should have 1 edge");
 		
-		test.addEdge(1,0);
-		assertEquals(test.E, 1, "Whenever an edge is added to a graph that already has that edge the number of edges should not increase");
-		
 		test.addEdge(0,1);
 		assertEquals(test.E, 2, "If an edge is added but in an opposite direction the number of edges should still increase");
 
+		assertThrows(IllegalArgumentException.class, () -> {
+			test.addEdge(1,0);
+		}, "Whenever an edge is added to a graph that already has that edge an exception should be thrown");
 		
+		assertThrows(IllegalArgumentException.class, () -> {
+			test.addEdge(-1,2);
+		}, "Whenever an edge with an invalid vertex is added to a graph an exception should be thrown");
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			test.addEdge(2,4);
+		}, "Whenever an edge with an invalid vertex is added to a graph an exception should be thrown");
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			test.addEdge(-1,4);
+		}, "Whenever an edge with an invalid vertex is added to a graph an exception should be thrown");
 	}
 }
