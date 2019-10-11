@@ -38,6 +38,20 @@ public class LowestCommonAncestor {
 		return isNodeValid(root.leftChild, targetNode) || isNodeValid(root.rightChild, targetNode);
 	}
 	
+	public static int findLCADigraph(Digraph graph, int v, int w) {
+		if(graph.E!=0 && graph.isVertexValid(v) && graph.isVertexValid(w)) {
+			if (!isCyclic(graph)) {
+				return 1;
+			}
+			else {
+				throw new RuntimeException("Graph is not Acyclic");
+			}
+		}
+		else {
+			throw new IllegalArgumentException("Invalid inputs, graph has no edges or vertices are not in the graph");
+		}
+	}
+	
 	public static boolean isCyclic(Digraph graph) {
 		boolean[] visitedNodes = new boolean [graph.V];
 		boolean[] recursionStack = new boolean [graph.V];
