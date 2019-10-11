@@ -243,6 +243,7 @@ public class LowestCommonAncestorTest {
 		
 		assertThrows(RuntimeException.class, () -> {
 			Digraph testGraph = new Digraph(2);
+			testGraph.addEdge(0, 1);
 			testGraph.addEdge(1, 0);
 			int result = LowestCommonAncestor.findLCADigraph(testGraph, 1, 0);
 		}, "If the graph passed as an input has a cycle it is invalid so an exception is thrown");
