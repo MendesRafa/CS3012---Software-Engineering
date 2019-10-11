@@ -339,7 +339,7 @@ public class LowestCommonAncestorTest {
 		// 
 		// 2
 		//@formatter:on
-		assertEquals(1, LowestCommonAncestor.	(testGraph), "In this graph the only connected vertex with indegree 0 is vertex 2");
+		assertEquals(1, LowestCommonAncestor.findDigraphRoot(testGraph), "In this graph the only connected vertex with indegree 0 is vertex 2");
 	}
 	
 	@Test
