@@ -56,4 +56,22 @@ class DigraphTest {
 			test.addEdge(-1, 4);
 		}, "Whenever an edge with an invalid vertex is added to a graph an exception should be thrown");
 	}
+	
+	@Test
+	void testIndegree() {
+		Digraph testGraph = new Digraph(4);
+		testGraph.addEdge(0,1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(2, 3);
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			testGraph.indegree(5);
+		}, "If the vertex passed as the input is invalid then an exception is thrown");
+
+		assertEquals(0, testGraph.indegree(0), "In this graph vertex 0 has no inbound edges i.e. indegree = 0");
+		assertEquals(1, testGraph.indegree(1), "In this graph vertex 1 has 1 inbound edges i.e. indegree = 1");
+		assertEquals(1, testGraph.indegree(2), "In this graph vertex 2 has 1 inbound edges i.e. indegree = 1");
+		assertEquals(2, testGraph.indegree(3), "In this graph vertex 3 has 2 inbound edges i.e. indegree = 2");
+	}
 }
