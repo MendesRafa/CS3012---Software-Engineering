@@ -87,4 +87,14 @@ public class LowestCommonAncestor {
 		
 		return false;
 	}
+	
+	public static int findRoot(Digraph graph) {
+		int vertex=0;
+		for (int i=0; i<graph.V; i++) {
+			if (graph.indegree(i)==0){
+				vertex=i;
+			}
+		}
+		return vertex;
+	}
 }
