@@ -331,5 +331,14 @@ public class LowestCommonAncestorTest {
 		//						 11
 		//@formatter:on
 		assertEquals(0, LowestCommonAncestor.findRoot(testGraph), "In the graph above the only vertex with indegree 0 is vertex 0");
+		
+		testGraph = new Digraph(3);
+		testGraph.addEdge(1, 0);
+		//@formatter:off
+		// 1-->0
+		// 
+		// 2
+		//@formatter:on
+		assertEquals(1, LowestCommonAncestor.findRoot(testGraph), "In this graph the only connected vertex with indegree 0 is vertex 2");
 	}
 }
