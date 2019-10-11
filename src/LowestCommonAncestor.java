@@ -91,7 +91,7 @@ public class LowestCommonAncestor {
 	public static int findRoot(Digraph graph) {
 		int vertex=0;
 		for (int i=0; i<graph.V; i++) {
-			if (graph.indegree(i)==0){
+			if (graph.indegree(i)==0 && !graph.adj.get(i).isEmpty()){
 				vertex=i;
 			}
 		}
