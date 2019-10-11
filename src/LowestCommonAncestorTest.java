@@ -249,4 +249,87 @@ public class LowestCommonAncestorTest {
 		}, "If the graph passed as an input has a cycle it is invalid so an exception is thrown");
 		
 	}
+	
+	@Test
+	//no need to test edge cases as this function is called after those are taken into account
+	public void findDigraphRoot() {
+		Digraph testGraph = new Digraph(4);
+		testGraph.addEdge(0,1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(2, 3);
+		//@formatter:off
+		//	 0
+		//  / \
+		// v   v
+		// 1   2
+		// \   /
+		//  v v
+		//   3
+		//@formatter:on
+		
+		assertEquals(0, LowestCommonAncestor.findRoot(testGraph), "In the above graph the only node with indegree 0 is node 0 and therefore the root of the graph");
+		
+		
+		testGraph = new Digraph(7);
+		testGraph.addEdge(6, 5);
+		testGraph.addEdge(6, 4);
+		testGraph.addEdge(4, 2);
+		testGraph.addEdge(5, 3);
+		testGraph.addEdge(2, 1);
+		testGraph.addEdge(3, 1);
+		testGraph.addEdge(1, 0);
+		//@formatter:off
+		//	 6
+		//  / \
+		// v   v
+		// 4   5
+		// |   |
+		// v   v
+		// 2   3
+		// |   /
+		// v  /
+		// 1<- 
+		// |
+		// v
+		// 0
+		//@formatter:on
+		assertEquals(6, LowestCommonAncestor.findRoot(testGraph), "In the above graph the only node with indegree 0 is node 6");
+		
+		testGraph = new Digraph(13);
+		testGraph.addEdge(0, 1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(1, 5);
+		testGraph.addEdge(2, 4);
+		testGraph.addEdge(4, 6);
+		testGraph.addEdge(4, 7);
+		testGraph.addEdge(6, 9);
+		testGraph.addEdge(9, 8);
+		testGraph.addEdge(9, 12);
+		testGraph.addEdge(9, 10);
+		testGraph.addEdge(10, 11);
+		//@formatter:off
+		//			   0
+		//			  / \
+		//			 v   v
+		//			 1   2
+		//			/     \
+		//		   v       v
+		//		   3       4 
+		//		  /       / \
+		//		 v	     v   v
+		//		 5	  	 7   6
+		//			         |
+		//			         v
+		//			   8 <---9
+		//        			/ \
+		//				   v   v	
+		//				  12   10
+		//						\
+		//						 v
+		//						 11
+		//@formatter:on
+		assertEquals(0, LowestCommonAncestor.findRoot(testGraph), "In the graph above the only vertex with indegree 0 is vertex 0");
+	}
 }
