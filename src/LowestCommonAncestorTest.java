@@ -211,4 +211,32 @@ public class LowestCommonAncestorTest {
 		testGraph.addEdge(3, 0);
 		assertTrue(LowestCommonAncestor.isCyclic(testGraph), "Since this graph has a cycle it is cyclic");
 	}
+	
+	@Test
+	public void testLCADigraphInvalidInputs () {
+		Digraph testGraph = new Digraph(0);
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			int result = LowestCommonAncestor.LCADigraph(testGraph, 1, 2);
+		}, "If an empty graph is passed as the parameter to find the LCA an exception is thrown");
+	
+		testGraph = new Digraph(2);
+		assertThrows(IllegalArgumentException.class, () -> {
+			int result = LowestCommonAncestor.LCADigraph(testGraph, 0, 1);
+		}, "If a graph with no edges is passed as the parameter to find the LCA an exception is thrown");
+		
+		testGraph.addEdge(0, 1);
+		assertThrows(IllegalArgumentException.class, () -> {
+			int result = LowestCommonAncestor.LCADigraph(testGraph, 3, 0);
+		}, "If one of the vertices passed as inputs is invalid then an exception is thrown");
+		assertThrows(IllegalArgumentException.class, () -> {
+			int result = LowestCommonAncestor.LCADigraph(testGraph, 0, -1);
+		}, "If one of the vertices passed as inputs is invalid then an exception is thrown");
+		
+		testGraph.addEdge(1, 0);
+		assertThrows(RuntimeException.class, () -> {
+			int result = LowestCommonAncestor.LCADigraph(testGraph, 1, 0);
+		}, "If the graph passed as an input has a cycle it is invalid so an exception is thrown");
+		
+	}
 }
