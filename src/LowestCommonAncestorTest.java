@@ -268,7 +268,7 @@ public class LowestCommonAncestorTest {
 		//   3
 		//@formatter:on
 		
-		assertEquals(0, LowestCommonAncestor.findRoot(testGraph), "In the above graph the only node with indegree 0 is node 0 and therefore the root of the graph");
+		assertEquals(0, LowestCommonAncestor.findDigraphRoot(testGraph), "In the above graph the only node with indegree 0 is node 0 and therefore the root of the graph");
 		
 		
 		testGraph = new Digraph(7);
@@ -294,7 +294,7 @@ public class LowestCommonAncestorTest {
 		// v
 		// 0
 		//@formatter:on
-		assertEquals(6, LowestCommonAncestor.findRoot(testGraph), "In the above graph the only node with indegree 0 is node 6");
+		assertEquals(6, LowestCommonAncestor.findDigraphRoot(testGraph), "In the above graph the only node with indegree 0 is node 6");
 		
 		testGraph = new Digraph(13);
 		testGraph.addEdge(0, 1);
@@ -330,7 +330,7 @@ public class LowestCommonAncestorTest {
 		//						 v
 		//						 11
 		//@formatter:on
-		assertEquals(0, LowestCommonAncestor.findRoot(testGraph), "In the graph above the only vertex with indegree 0 is vertex 0");
+		assertEquals(0, LowestCommonAncestor.findDigraphRoot(testGraph), "In the graph above the only vertex with indegree 0 is vertex 0");
 		
 		testGraph = new Digraph(3);
 		testGraph.addEdge(1, 0);
@@ -339,11 +339,11 @@ public class LowestCommonAncestorTest {
 		// 
 		// 2
 		//@formatter:on
-		assertEquals(1, LowestCommonAncestor.findRoot(testGraph), "In this graph the only connected vertex with indegree 0 is vertex 2");
+		assertEquals(1, LowestCommonAncestor.	(testGraph), "In this graph the only connected vertex with indegree 0 is vertex 2");
 	}
 	
 	@Test
-	public void testDepth() {
+	public void testdigraphVertexDepth() {
 		Digraph testGraph = new Digraph(4);
 		testGraph.addEdge(0, 1);
 		testGraph.addEdge(0, 2);
@@ -359,10 +359,10 @@ public class LowestCommonAncestorTest {
 		//   3
 		//@formatter:on
 		int root=0;
-		assertEquals(0, LowestCommonAncestor.depth(testGraph, root, 0), "The distance from vertex '0' to the root vertex '0' is 0 edge");
-		assertEquals(1, LowestCommonAncestor.depth(testGraph, root, 1), "The distance from vertex '1' to the root vertex '0' is 1 edge");
-		assertEquals(1, LowestCommonAncestor.depth(testGraph, root, 2), "The distance from vertex '2' to the root vertex '0' is 1 edge");
-		assertEquals(2, LowestCommonAncestor.depth(testGraph, root, 3), "The distance from vertex '3' to the root vertex '0' is 2 edges");
+		assertEquals(0, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 0), "The distance from vertex '0' to the root vertex '0' is 0 edge");
+		assertEquals(1, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 1), "The distance from vertex '1' to the root vertex '0' is 1 edge");
+		assertEquals(1, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 2), "The distance from vertex '2' to the root vertex '0' is 1 edge");
+		assertEquals(2, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 3), "The distance from vertex '3' to the root vertex '0' is 2 edges");
 
 		
 		testGraph = new Digraph(7);
@@ -389,13 +389,13 @@ public class LowestCommonAncestorTest {
 		// 0
 		//@formatter:on
 		root = 6;
-		assertEquals(0, LowestCommonAncestor.depth(testGraph, root, 6), "The distance from vertex '6' to the root vertex '6' is 0 edge");
-		assertEquals(1, LowestCommonAncestor.depth(testGraph, root, 5), "The distance from vertex '5' to the root vertex '6' is 1 edge");
-		assertEquals(1, LowestCommonAncestor.depth(testGraph, root, 4), "The distance from vertex '4' to the root vertex '6' is 1 edge");
-		assertEquals(2, LowestCommonAncestor.depth(testGraph, root, 3), "The distance from vertex '3' to the root vertex '6' is 2 edges");
-		assertEquals(2, LowestCommonAncestor.depth(testGraph, root, 2), "The distance from vertex '2' to the root vertex '6' is 2 edges");
-		assertEquals(3, LowestCommonAncestor.depth(testGraph, root, 1), "The distance from vertex '1' to the root vertex '6' is 3 edges");
-		assertEquals(4, LowestCommonAncestor.depth(testGraph, root, 0), "The distance from vertex '0' to the root vertex '6' is 4 edges");
+		assertEquals(0, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 6), "The distance from vertex '6' to the root vertex '6' is 0 edge");
+		assertEquals(1, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 5), "The distance from vertex '5' to the root vertex '6' is 1 edge");
+		assertEquals(1, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 4), "The distance from vertex '4' to the root vertex '6' is 1 edge");
+		assertEquals(2, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 3), "The distance from vertex '3' to the root vertex '6' is 2 edges");
+		assertEquals(2, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 2), "The distance from vertex '2' to the root vertex '6' is 2 edges");
+		assertEquals(3, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 1), "The distance from vertex '1' to the root vertex '6' is 3 edges");
+		assertEquals(4, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 0), "The distance from vertex '0' to the root vertex '6' is 4 edges");
 		
 		testGraph = new Digraph(13);
 		testGraph.addEdge(0, 1);
@@ -432,18 +432,18 @@ public class LowestCommonAncestorTest {
 		//						 11
 		//@formatter:on
 		root = 0;
-		assertEquals(0, LowestCommonAncestor.depth(testGraph, root, 0), "The distance from vertex '0' to the root vertex '0' is 0 edge");
-		assertEquals(1, LowestCommonAncestor.depth(testGraph, root, 1), "The distance from vertex '1' to the root vertex '0' is 1 edge");
-		assertEquals(1, LowestCommonAncestor.depth(testGraph, root, 2), "The distance from vertex '2' to the root vertex '0' is 1 edge");
-		assertEquals(2, LowestCommonAncestor.depth(testGraph, root, 3), "The distance from vertex '3' to the root vertex '0' is 2 edges");
-		assertEquals(2, LowestCommonAncestor.depth(testGraph, root, 4), "The distance from vertex '4' to the root vertex '0' is 2 edges");
-		assertEquals(3, LowestCommonAncestor.depth(testGraph, root, 5), "The distance from vertex '5' to the root vertex '0' is 3 edges");
-		assertEquals(3, LowestCommonAncestor.depth(testGraph, root, 6), "The distance from vertex '6' to the root vertex '0' is 3 edges");
-		assertEquals(3, LowestCommonAncestor.depth(testGraph, root, 7), "The distance from vertex '7' to the root vertex '0' is 3 edges");
-		assertEquals(5, LowestCommonAncestor.depth(testGraph, root, 8), "The distance from vertex '8' to the root vertex '0' is 5 edges");
-		assertEquals(4, LowestCommonAncestor.depth(testGraph, root, 9), "The distance from vertex '9' to the root vertex '0' is 4 edges");
-		assertEquals(5, LowestCommonAncestor.depth(testGraph, root, 10), "The distance from vertex '10' to the root vertex '0' is 5 edges");
-		assertEquals(6, LowestCommonAncestor.depth(testGraph, root, 11), "The distance from vertex '11' to the root vertex '0' is 6 edges");
-		assertEquals(5, LowestCommonAncestor.depth(testGraph, root, 12), "The distance from vertex '12' to the root vertex '0' is 5 edges");
+		assertEquals(0, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 0), "The distance from vertex '0' to the root vertex '0' is 0 edge");
+		assertEquals(1, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 1), "The distance from vertex '1' to the root vertex '0' is 1 edge");
+		assertEquals(1, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 2), "The distance from vertex '2' to the root vertex '0' is 1 edge");
+		assertEquals(2, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 3), "The distance from vertex '3' to the root vertex '0' is 2 edges");
+		assertEquals(2, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 4), "The distance from vertex '4' to the root vertex '0' is 2 edges");
+		assertEquals(3, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 5), "The distance from vertex '5' to the root vertex '0' is 3 edges");
+		assertEquals(3, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 6), "The distance from vertex '6' to the root vertex '0' is 3 edges");
+		assertEquals(3, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 7), "The distance from vertex '7' to the root vertex '0' is 3 edges");
+		assertEquals(5, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 8), "The distance from vertex '8' to the root vertex '0' is 5 edges");
+		assertEquals(4, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 9), "The distance from vertex '9' to the root vertex '0' is 4 edges");
+		assertEquals(5, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 10), "The distance from vertex '10' to the root vertex '0' is 5 edges");
+		assertEquals(6, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 11), "The distance from vertex '11' to the root vertex '0' is 6 edges");
+		assertEquals(5, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 12), "The distance from vertex '12' to the root vertex '0' is 5 edges");
 	}
 }
