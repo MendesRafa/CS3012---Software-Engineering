@@ -479,7 +479,7 @@ public class LowestCommonAncestorTest {
 		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 2), ancestors,"The ancestors of vertex '2' are '0' and itself");
 				
 		ancestors= Arrays.asList(0,1,2,3);
-		assertArrayEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 3), ancestors,"The ancestors of vertex '3' are '0', '1', '2' and itself");
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 3), ancestors,"The ancestors of vertex '3' are '0', '1', '2' and itself");
 
 		
 		testGraph = new Digraph(7);
