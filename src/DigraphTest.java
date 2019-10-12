@@ -74,4 +74,26 @@ class DigraphTest {
 		assertEquals(1, testGraph.indegree(2), "In this graph vertex 2 has 1 inbound edges i.e. indegree = 1");
 		assertEquals(2, testGraph.indegree(3), "In this graph vertex 3 has 2 inbound edges i.e. indegree = 2");
 	}
+	
+	@Test
+	void testReverse() {
+		Digraph testGraph = new Digraph(4);
+		testGraph.addEdge(0,1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(2, 3);
+		
+		Digraph reversedGraph = testGraph.reverse();
+		assertTrue(reversedGraph.adj.get(0).isEmpty(), "In this reverse graph vertex 0 has no outbound edges");
+		
+		assertTrue(reversedGraph.adj.get(1).contains(0), "In this reverse graph the edge 1->0 should exist");
+		assertEquals(reversedGraph.adj.get(1).size(), 1, "In this reverse graph vertex 1 should only have one outbound edge");
+		
+		assertTrue(reversedGraph.adj.get(2).contains(0), "In this reverse graph the edge 2->0 should exist");
+		assertEquals(reversedGraph.adj.get(2).size(), 1, "In this reverse graph vertex 2 should only have one outbound edge");
+		
+		assertTrue(reversedGraph.adj.get(3).contains(1), "In this reverse graph the edge 3->1 should exist");
+		assertTrue(reversedGraph.adj.get(3).contains(2), "In this reverse graph the edge 3->2 should exist");
+		assertEquals(reversedGraph.adj.get(3).size(), 2, "In this reverse graph vertex 3 should only have two outbound edge");
+	}
 }
