@@ -1,5 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class LowestCommonAncestorTest {
@@ -445,5 +450,157 @@ public class LowestCommonAncestorTest {
 		assertEquals(5, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 10), "The distance from vertex '10' to the root vertex '0' is 5 edges");
 		assertEquals(6, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 11), "The distance from vertex '11' to the root vertex '0' is 6 edges");
 		assertEquals(5, LowestCommonAncestor.digraphVertexDepth(testGraph, root, 12), "The distance from vertex '12' to the root vertex '0' is 5 edges");
+	}
+	
+	@Test
+	public void testDigraphVertexAncesstors () {
+		Digraph testGraph = new Digraph(4);
+		testGraph.addEdge(0, 1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(2, 3);
+		//@formatter:off
+		//	 0
+		//  / \
+		// v   v
+		// 1   2
+		// \   /
+		//  v v
+		//   3
+		//@formatter:on
+		int root=0;
+		List<Integer> ancestors = Arrays.asList(0);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 0), ancestors,"The ancestors of vertex '0' are just itself as it is the root");
+		
+		ancestors= Arrays.asList(0,1);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 1), ancestors,"The ancestors of vertex '1' are '0' and itself");
+		
+		ancestors= Arrays.asList(0,2);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 2), ancestors,"The ancestors of vertex '2' are '0' and itself");
+				
+		ancestors= Arrays.asList(0,1,2,3);
+		assertArrayEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 3), ancestors,"The ancestors of vertex '3' are '0', '1', '2' and itself");
+
+		
+		testGraph = new Digraph(7);
+		testGraph.addEdge(6, 5);
+		testGraph.addEdge(6, 4);
+		testGraph.addEdge(4, 2);
+		testGraph.addEdge(5, 3);
+		testGraph.addEdge(2, 1);
+		testGraph.addEdge(3, 1);
+		testGraph.addEdge(1, 0);
+		//@formatter:off
+		//	 6
+		//  / \
+		// v   v
+		// 4   5
+		// |   |
+		// v   v
+		// 2   3
+		// |   /
+		// v  /
+		// 1<- 
+		// |
+		// v
+		// 0
+		//@formatter:on
+		root = 6;
+		ancestors= Arrays.asList(6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 6), ancestors,"The ancestors of vertex '6' are just itself as it is the root");
+		
+		ancestors= Arrays.asList(4,6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 4), ancestors,"The ancestors of vertex '4' are '6' and itself");
+		
+		ancestors= Arrays.asList(5,6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 5), ancestors,"The ancestors of vertex '5' are '6' and itself");
+		
+		ancestors= Arrays.asList(2,4,6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 2), ancestors,"The ancestors of vertex '2' are '4', '6' and itself");
+		
+		ancestors= Arrays.asList(3,5,6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 3), ancestors,"The ancestors of vertex '3' are '5', '6' and itself");
+		
+		ancestors= Arrays.asList(1,2,3,4,5,6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 1), ancestors,"The ancestors of vertex '1' are '2', '3', '4', '5', '6' and itself");
+		
+		ancestors= Arrays.asList(0,1,2,3,4,5,6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 0), ancestors,"The ancestors of vertex '0' are '1', '2', '3', '4', '5', '6' and itself");
+		
+		
+		testGraph = new Digraph(13);
+		testGraph.addEdge(0, 1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(3, 5);
+		testGraph.addEdge(2, 4);
+		testGraph.addEdge(4, 6);
+		testGraph.addEdge(4, 7);
+		testGraph.addEdge(6, 9);
+		testGraph.addEdge(9, 8);
+		testGraph.addEdge(9, 12);
+		testGraph.addEdge(9, 10);
+		testGraph.addEdge(10, 11);
+		//@formatter:off
+		//			   0
+		//			  / \
+		//			 v   v
+		//			 1   2
+		//			/     \
+		//		   v       v
+		//		   3       4 
+		//		  /       / \
+		//		 v	     v   v
+		//		 5	  	 7   6
+		//			         |
+		//			         v
+		//			   8 <---9
+		//        			/ \
+		//				   v   v	
+		//				  12   10
+		//						\
+		//						 v
+		//						 11
+		//@formatter:on
+		root = 0;
+		
+		ancestors= Arrays.asList(0);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 0), ancestors,"The ancestors of vertex '0' are just itself as it is the root");
+
+		ancestors= Arrays.asList(0,1);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 1), ancestors,"The ancestors of vertex '1' are '0' and itself");
+		
+		ancestors= Arrays.asList(0,2);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 2), ancestors,"The ancestors of vertex '2' are '0' and itself");
+		
+		ancestors= Arrays.asList(0,1,3);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 3), ancestors,"The ancestors of vertex '3' are '0', '1' and itself");
+		
+		ancestors= Arrays.asList(0,2,4);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 4), ancestors,"The ancestors of vertex '4' are '0', '2' and itself");
+
+		ancestors= Arrays.asList(0,1,3,5);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 5), ancestors,"The ancestors of vertex '5' are '0', '1', '3' and itself");
+		
+		ancestors= Arrays.asList(0,2,4,6);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 6), ancestors,"The ancestors of vertex '6' are '0', '2', '4' and itself");
+		
+		ancestors= Arrays.asList(0,2,4,7);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 7), ancestors,"The ancestors of vertex '7' are '0', '2', '4' and itself");
+		
+		ancestors= Arrays.asList(0,2,4,6,8,9);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 8), ancestors,"The ancestors of vertex '8' are '0', '2', '4', '6', '9' and itself");
+		
+		ancestors= Arrays.asList(0,2,4,6,9);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 9), ancestors,"The ancestors of vertex '9' are '0', '2', '4', '6' and itself");
+		
+		ancestors= Arrays.asList(0,2,4,6,9,10);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 10), ancestors,"The ancestors of vertex '10' are '0', '2', '4', '6', '9' and itself");
+		
+		ancestors= Arrays.asList(0,2,4,6,9,10,11);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 11), ancestors,"The ancestors of vertex '11' are '0', '2', '4', '6', '9', '10' and itself");
+		
+		ancestors= Arrays.asList(0,2,4,6,9,12);
+		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 12), ancestors,"The ancestors of vertex '12 are '0', '2', '4', '6', '9' and itself");
 	}
 }
