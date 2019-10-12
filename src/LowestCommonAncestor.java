@@ -1,4 +1,6 @@
+import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
 public class LowestCommonAncestor {
 
@@ -96,5 +98,31 @@ public class LowestCommonAncestor {
 			}
 		}
 		return vertex;
+	}
+	public static int digraphVertexDepth(Digraph graph, int root, int vertex) {
+		Stack<Integer> visited = new Stack<Integer>();
+		int depth = 0;
+		return digraphVertexDepthRecursive(graph, root, vertex, depth, visited);
+	}
+	
+	private static int digraphVertexDepthRecursive(Digraph graph, int currentVertex, int targetVertex, int depth, Stack<Integer> visitedVertices) {
+		if(currentVertex == targetVertex) {
+			visitedVertices.push(currentVertex);
+			return visitedVertices.size()-1;
+		}
+		
+		visitedVertices.push(currentVertex);
+		
+		Iterator<Integer> i = graph.adj.get(currentVertex).listIterator();
+		while (i.hasNext()) {
+			int newVertex = i.next();
+			if(!visitedVertices.contains(newVertex)) {
+				depth=digraphVertexDepthRecursive(graph, newVertex, targetVertex, depth, visitedVertices);
+				if(!visitedVertices.empty()) {
+					visitedVertices.pop();
+				}
+			}
+		}
+		return depth;
 	}
 }
