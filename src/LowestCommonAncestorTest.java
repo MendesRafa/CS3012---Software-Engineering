@@ -401,7 +401,7 @@ public class LowestCommonAncestorTest {
 		testGraph.addEdge(0, 1);
 		testGraph.addEdge(0, 2);
 		testGraph.addEdge(1, 3);
-		testGraph.addEdge(1, 5);
+		testGraph.addEdge(3, 5);
 		testGraph.addEdge(2, 4);
 		testGraph.addEdge(4, 6);
 		testGraph.addEdge(4, 7);
