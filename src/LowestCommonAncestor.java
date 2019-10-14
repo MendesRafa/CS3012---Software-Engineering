@@ -44,7 +44,39 @@ public class LowestCommonAncestor {
 	public static int findLCADigraph(Digraph graph, int v, int w) {
 		if(graph.E!=0 && graph.isVertexValid(v) && graph.isVertexValid(w)) {
 			if (!isCyclic(graph)) {
-				return 1;
+				int root = findDigraphRoot(graph);
+				List<Integer> firstAncestors = digraphVertexAncestors(graph, root, v);
+				List<Integer> secondAncestors = digraphVertexAncestors(graph, root, w);
+				
+				int[] firstAncestorsArray = firstAncestors.stream().mapToInt(i->(int)i).toArray();
+				int[] secondAncestorsArray = secondAncestors.stream().mapToInt(i->(int)i).toArray();
+				
+				int j, k, tmp, depth;
+				
+				List<Integer> commonAncestors = new ArrayList<Integer>();
+				
+				for(j=0; j<firstAncestorsArray.length; j++){
+					for(k=0; k<secondAncestorsArray.length; k++) {
+						if(firstAncestorsArray[j]==secondAncestorsArray[k]) {
+							commonAncestors.add(firstAncestorsArray[j]);
+						}
+					}
+				}
+				
+				int [] commonAncestorsArray = commonAncestors.stream().mapToInt(i->(int)i).toArray();
+				
+				for (j=1; j<commonAncestorsArray.length; j++) {
+					tmp=commonAncestorsArray[j];
+					depth = digraphVertexDepth(graph, root, commonAncestorsArray[j]);
+					for (k = j - 1; k >= 0; k--) {
+						if (depth > digraphVertexDepth(graph, root, commonAncestorsArray[k])) {
+							commonAncestorsArray[k+1]=commonAncestorsArray[k];
+							commonAncestorsArray[k]=tmp;
+						}
+					}
+				}
+				
+				return commonAncestorsArray[0];
 			}
 			else {
 				throw new RuntimeException("Graph is not Acyclic");
