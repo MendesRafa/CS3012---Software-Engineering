@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
@@ -124,5 +125,27 @@ public class LowestCommonAncestor {
 			}
 		}
 		return depth;
+	}
+	
+	public static List<Integer> digraphVertexAncestors(Digraph graph, int root, int vertex) {
+		List<Integer> visited = new ArrayList<Integer>();
+		List<Integer> ancestors = new ArrayList<Integer>();
+		Digraph reversedGraph = graph.reverse();
+		ancestors.addAll(digraphVertexAncestorsRecursive(reversedGraph, vertex, root, visited));
+		return ancestors;
+	}
+	
+	private static List<Integer> digraphVertexAncestorsRecursive(Digraph graph, int root, int vertex, List<Integer> visited) {
+		visited.add(root);
+		
+		Iterator<Integer> i = graph.adj.get(root).listIterator();
+		while (i.hasNext()) {
+			int newVertex = i.next();
+			if(!visited.contains(newVertex)) {
+				digraphVertexAncestorsRecursive(graph, newVertex, vertex, visited);
+			}
+		}
+
+		return visited;
 	}
 }
