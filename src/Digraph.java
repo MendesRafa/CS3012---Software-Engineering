@@ -50,4 +50,13 @@ public class Digraph {
 		} else
 			return true;
 	}
+	
+	public Digraph reverse() {
+		Digraph reverse = new Digraph(this.V);
+		for(int v=0; v<this.V; v++) {
+			for (int w : this.adj.get(v))
+				reverse.addEdge(w, v);
+		}
+		return reverse;
+	}
 }
