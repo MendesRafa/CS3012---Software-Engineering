@@ -654,7 +654,7 @@ public class LowestCommonAncestorTest {
 		//@formatter:on
 		assertEquals(3, LowestCommonAncestor.findLCADigraph(testGraph, 1, 3), "The LCA of vertex '1' and vertex '3' is vertex '1'");
 		assertEquals(2, LowestCommonAncestor.findLCADigraph(testGraph, 1, 2), "The LCA of vertex '1' and vertex '2' is vertex '2'");
-		assertEquals(0, LowestCommonAncestor.findLCADigraph(testGraph, 0, 3), "The LCA of vertex '0' and vertex '3' is vertex '0'");
+		assertEquals(3, LowestCommonAncestor.findLCADigraph(testGraph, 0, 3), "The LCA of vertex '0' and vertex '3' is vertex '0'");
 		assertEquals(6, LowestCommonAncestor.findLCADigraph(testGraph, 2, 3), "The LCA of vertex '2' and vertex '3' is vertex '6'");
 		assertEquals(6, LowestCommonAncestor.findLCADigraph(testGraph, 4, 5), "The LCA of vertex '4' and vertex '5' is vertex '6'");
 		
