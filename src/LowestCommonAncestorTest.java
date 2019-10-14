@@ -603,4 +603,99 @@ public class LowestCommonAncestorTest {
 		ancestors= Arrays.asList(12,9,6,4,2,0);
 		assertEquals(LowestCommonAncestor.digraphVertexAncestors(testGraph, root, 12), ancestors,"The ancestors of vertex '12 are '0', '2', '4', '6', '9' and itself");
 	}
+	
+	@Test
+	public void testDigraphLCA() {
+		Digraph testGraph = new Digraph(4);
+		testGraph.addEdge(0, 1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(2, 3);
+		//@formatter:off
+		//	 0
+		//  / \
+		// v   v
+		// 1   2
+		// \   /
+		//  v v
+		//   3
+		//@formatter:on
+		assertEquals(0, LowestCommonAncestor.findLCADigraph(testGraph, 0, 0), "The LCA of vertex v and vertex v is vertex v");
+		assertEquals(0, LowestCommonAncestor.findLCADigraph(testGraph, 0, 1), "The LCA of vertex '0' and vertex '1' is vertex '0'");
+		assertEquals(0, LowestCommonAncestor.findLCADigraph(testGraph, 0, 2), "The LCA of vertex '0' and vertex '2' is vertex '0'");
+		assertEquals(0, LowestCommonAncestor.findLCADigraph(testGraph, 0, 3), "The LCA of vertex '0' and vertex '3' is vertex '0'");
+		assertEquals(1, LowestCommonAncestor.findLCADigraph(testGraph, 1, 3), "The LCA of vertex '1' and vertex '3' is vertex '1'");
+		assertEquals(2, LowestCommonAncestor.findLCADigraph(testGraph, 2, 3), "The LCA of vertex '2' and vertex '3' is vertex '3'");
+
+		
+		
+		testGraph = new Digraph(7);
+		testGraph.addEdge(6, 5);
+		testGraph.addEdge(6, 4);
+		testGraph.addEdge(4, 2);
+		testGraph.addEdge(5, 3);
+		testGraph.addEdge(2, 1);
+		testGraph.addEdge(3, 1);
+		testGraph.addEdge(1, 0);
+		//@formatter:off
+		//	 6
+		//  / \
+		// v   v
+		// 4   5
+		// |   |
+		// v   v
+		// 2   3
+		// |   /
+		// v  /
+		// 1<- 
+		// |
+		// v
+		// 0
+		//@formatter:on
+		assertEquals(3, LowestCommonAncestor.findLCADigraph(testGraph, 1, 3), "The LCA of vertex '1' and vertex '3' is vertex '1'");
+		assertEquals(2, LowestCommonAncestor.findLCADigraph(testGraph, 1, 2), "The LCA of vertex '1' and vertex '2' is vertex '2'");
+		assertEquals(0, LowestCommonAncestor.findLCADigraph(testGraph, 0, 3), "The LCA of vertex '0' and vertex '3' is vertex '0'");
+		assertEquals(6, LowestCommonAncestor.findLCADigraph(testGraph, 2, 3), "The LCA of vertex '2' and vertex '3' is vertex '6'");
+		assertEquals(6, LowestCommonAncestor.findLCADigraph(testGraph, 4, 5), "The LCA of vertex '4' and vertex '5' is vertex '6'");
+		
+		testGraph = new Digraph(13);
+		testGraph.addEdge(0, 1);
+		testGraph.addEdge(0, 2);
+		testGraph.addEdge(1, 3);
+		testGraph.addEdge(3, 5);
+		testGraph.addEdge(2, 4);
+		testGraph.addEdge(4, 6);
+		testGraph.addEdge(4, 7);
+		testGraph.addEdge(6, 9);
+		testGraph.addEdge(9, 8);
+		testGraph.addEdge(9, 12);
+		testGraph.addEdge(9, 10);
+		testGraph.addEdge(10, 11);
+		//@formatter:off
+		//			   0
+		//			  / \
+		//			 v   v
+		//			 1   2
+		//			/     \
+		//		   v       v
+		//		   3       4 
+		//		  /       / \
+		//		 v	     v   v
+		//		 5	  	 7   6
+		//			         |
+		//			         v
+		//			   8 <---9
+		//        			/ \
+		//				   v   v	
+		//				  12   10
+		//						\
+		//						 v
+		//						 11
+		//@formatter:on
+
+		assertEquals(9, LowestCommonAncestor.findLCADigraph(testGraph, 11, 12), "The LCA of vertex '0' and vertex '1' is vertex '0'");
+		assertEquals(0, LowestCommonAncestor.findLCADigraph(testGraph, 10, 5), "The LCA of vertex '0' and vertex '2' is vertex '0'");
+		assertEquals(4, LowestCommonAncestor.findLCADigraph(testGraph, 6, 7), "The LCA of vertex '0' and vertex '3' is vertex '0'");
+		assertEquals(9, LowestCommonAncestor.findLCADigraph(testGraph, 8, 12), "The LCA of vertex '1' and vertex '3' is vertex '1'");		
+	}
 }
