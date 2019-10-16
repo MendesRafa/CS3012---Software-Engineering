@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 class DigraphTest {
 
 	@Test
+	//Test for the constructor
 	void testVertexOnlyConstructor() {
 		Digraph test = new Digraph(5);
 		assertEquals(test.V, 5,
@@ -20,6 +21,7 @@ class DigraphTest {
 	}
 
 	@Test
+	//Test for the method which returns if a given vertex is in the graph or not
 	void testIsVertexValid() {
 		Digraph test = new Digraph(4);
 
@@ -29,6 +31,7 @@ class DigraphTest {
 	}
 
 	@Test
+	//Test for the method which adds an edge to the graph
 	void testAddEdge() {
 		Digraph test = new Digraph(4);
 		assertEquals(test.E, 0, "Whenever a graph is first constructed it should have 0 edges");
@@ -58,6 +61,8 @@ class DigraphTest {
 	}
 	
 	@Test
+	//Test for the method which returns the indegree of a given vertex in the graph
+	//Indegree: The number of edges directed into a vertex in a directed graph
 	void testIndegree() {
 		Digraph testGraph = new Digraph(4);
 		testGraph.addEdge(0,1);
@@ -76,6 +81,8 @@ class DigraphTest {
 	}
 	
 	@Test
+	// Test for method which returns the reverse graph of a given graph i.e. the
+	// direction of the edges is reversed
 	void testReverse() {
 		Digraph testGraph = new Digraph(4);
 		testGraph.addEdge(0,1);

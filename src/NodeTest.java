@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 class NodeTest {
 
 	@Test
+	// Test for the data type constructor
 	public void testConstructor() {
 		Node testNode = new Node(5);
 		assertEquals(testNode.value, 5, "Check if the value of the generated node is correct");
@@ -13,6 +14,7 @@ class NodeTest {
 	}
 
 	@Test
+	// Test the functionality for creating Trees from Nodes
 	public void testConstructingASimpleBST() {
 		Node root = new Node(1);
 		root.rightChild = new Node(2);
