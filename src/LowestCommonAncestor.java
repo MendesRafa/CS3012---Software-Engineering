@@ -5,6 +5,7 @@ import java.util.Stack;
 
 public class LowestCommonAncestor {
 
+	//Method which finds the Lowest Common Ancestor of node u and v in a Binary Tree
 	public static Node findLCA(Node root, Node firstNode, Node secondNode) {
 		if (isNodeValid(root, firstNode) && isNodeValid(root, secondNode)) {
 			return findLCARecursive(root, firstNode, secondNode);
@@ -13,6 +14,7 @@ public class LowestCommonAncestor {
 		}
 	}
 
+	//Recursive util method used for finding the Lowest Common Ancestor of node u and v in a Binary Tree
 	public static Node findLCARecursive(Node root, Node firstNode, Node secondNode) {
 		if (root == null) {
 			return null;
@@ -29,7 +31,7 @@ public class LowestCommonAncestor {
 		return ancestor;
 	}
 
-	// checks if the LCA arguments are valid
+	//Method which checks if a Node is present in a Binary Tree
 	public static boolean isNodeValid(Node root, Node targetNode) {
 		if (root == null || targetNode == null) {
 			return false;
@@ -41,6 +43,8 @@ public class LowestCommonAncestor {
 		return isNodeValid(root.leftChild, targetNode) || isNodeValid(root.rightChild, targetNode);
 	}
 	
+	//Method which finds the Lowest Common Ancestor of node v and w in a Digraph
+	//Constraints of this method: Digraph must have only one root i.e. only one root which has indegree=0
 	public static int findLCADigraph(Digraph graph, int v, int w) {
 		if(graph.E!=0 && graph.isVertexValid(v) && graph.isVertexValid(w)) {
 			if (!isCyclic(graph)) {
@@ -87,6 +91,7 @@ public class LowestCommonAncestor {
 		}
 	}
 	
+	//Method which checks if a Digraph contains a Cycle or not
 	public static boolean isCyclic(Digraph graph) {
 		boolean[] visitedNodes = new boolean [graph.V];
 		boolean[] recursionStack = new boolean [graph.V];
@@ -99,6 +104,7 @@ public class LowestCommonAncestor {
 		return false;
 	}
 	
+	//Recursive util method which traverses graph checking for cycles
 	private static boolean isCyclicRecursive(int i, boolean[] visitedNodes, boolean[] recursionStack, Digraph graph) {
 		if(recursionStack[i]) {
 			return true;
@@ -123,6 +129,7 @@ public class LowestCommonAncestor {
 		return false;
 	}
 	
+	//Find the first vertex in the list of vertices in the Digraph which has indegree=0 i.e. the first vertex which is considered to be a root
 	public static int findDigraphRoot(Digraph graph) {
 		int vertex=0;
 		for (int i=0; i<graph.V; i++) {
@@ -132,12 +139,15 @@ public class LowestCommonAncestor {
 		}
 		return vertex;
 	}
+	
+	//Find the depth of a target vertex where depth is defined as the distance from the vertex to the root
 	public static int digraphVertexDepth(Digraph graph, int root, int vertex) {
 		Stack<Integer> visited = new Stack<Integer>();
 		int depth = 0;
 		return digraphVertexDepthRecursive(graph, root, vertex, depth, visited);
 	}
 	
+	//Recursive util method which traverses the graph to find the depth of a vertex i.e. distance between the vertex and the selected root
 	private static int digraphVertexDepthRecursive(Digraph graph, int currentVertex, int targetVertex, int depth, Stack<Integer> visitedVertices) {
 		if(currentVertex == targetVertex) {
 			visitedVertices.push(currentVertex);
@@ -159,22 +169,24 @@ public class LowestCommonAncestor {
 		return depth;
 	}
 	
+	//Method which returns a list of vertices which are the ancestors of a target vertex
 	public static List<Integer> digraphVertexAncestors(Digraph graph, int root, int vertex) {
 		List<Integer> visited = new ArrayList<Integer>();
 		List<Integer> ancestors = new ArrayList<Integer>();
 		Digraph reversedGraph = graph.reverse();
-		ancestors.addAll(digraphVertexAncestorsRecursive(reversedGraph, vertex, root, visited));
+		ancestors.addAll(digraphVertexAncestorsRecursive(reversedGraph, vertex, visited));
 		return ancestors;
 	}
 	
-	private static List<Integer> digraphVertexAncestorsRecursive(Digraph graph, int root, int vertex, List<Integer> visited) {
-		visited.add(root);
+	//Recursive method util which traverses the graph and adds ancestors to the vertex to a list which is returned at the end
+	private static List<Integer> digraphVertexAncestorsRecursive(Digraph graph, int currentVertex, List<Integer> visited) {
+		visited.add(currentVertex);
 		
-		Iterator<Integer> i = graph.adj.get(root).listIterator();
+		Iterator<Integer> i = graph.adj.get(currentVertex).listIterator();
 		while (i.hasNext()) {
 			int newVertex = i.next();
 			if(!visited.contains(newVertex)) {
-				digraphVertexAncestorsRecursive(graph, newVertex, vertex, visited);
+				digraphVertexAncestorsRecursive(graph, newVertex, visited);
 			}
 		}
 
