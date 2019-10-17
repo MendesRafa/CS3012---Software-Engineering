@@ -12,3 +12,20 @@
 5. My definition of root (for a DAG) is as follows: First vertex in the list of vertices which represent the graph which has an indegree (the number of edges directed into a vertex in a directed graph) of 0.
 
 6. If there are more than one LCAs (for a DAG) only the first one (relative to the list of vertices) is returned. 
+
+# Instructions for running the test suite
+1. Make sure you have Eclipse installed in your machine
+
+2. Clone the repo into your local machine
+
+3. Open Eclipse and go to File, Click on and select the Lowest Common Ancestor folder
+
+4. Open the test files and run them individually (Note: Test Coverage for each test file should only apply to the corresponding code file and not the project as a whole)
+
+# Where to find each assignment
+Assignment 1 (Simple LCA): Because I have merged the other two parts into master, my submission for Part 1 can only be found by cherry-pick the commit with the sha 3880c223e9f0598674f61ff1e5c1af4662bc0863.
+
+Assignment 2 (DAG LCA): You can simply take the Lowest Common Ancestor folder from master to be my submission.
+
+Assignment 3 (Biograh): You can simply take the PDF found in the Biography folder in the master branch.
+
