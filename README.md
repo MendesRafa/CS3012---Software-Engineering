@@ -18,7 +18,7 @@
 
 2. Clone the repo into your local machine
 
-3. Open Eclipse and go to File, Click on and select the Lowest Common Ancestor folder
+3. Open Eclipse and go to File, Click on "Open Projects from File System" and select the Lowest Common Ancestor folder
 
 4. Open the test files and run them individually (Note: Test Coverage for each test file should only apply to the corresponding code file and not the project as a whole)
 
