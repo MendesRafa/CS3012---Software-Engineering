@@ -27,5 +27,5 @@ Assignment 1 (Simple LCA): Because I have merged the other two parts into master
 
 Assignment 2 (DAG LCA): You can simply take the Lowest Common Ancestor folder from master to be my submission.
 
-Assignment 3 (Biograh): You can simply take the PDF found in the Biography folder in the master branch.
+Assignment 3 (Biography): You can simply take the PDF found in the Biography folder in the master branch.
 
