@@ -29,3 +29,5 @@ Assignment 2 (DAG LCA): You can simply take the Lowest Common Ancestor folder fr
 
 Assignment 3 (Biography): You can simply take the PDF found in the Biography folder in the master branch.
 
+Assignment 4 (Report): You can simply take the PDF found in the Software Engineering Process Essay folder in the master branch.
+
